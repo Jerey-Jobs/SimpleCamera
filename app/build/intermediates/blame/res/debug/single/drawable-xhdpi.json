@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\androidAPP\\SimpleCamera\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\btn_camera_all_click.png",
+        "source": "E:\\androidAPP\\SimpleCamera\\app\\src\\main\\res\\drawable-xhdpi\\btn_camera_all_click.png"
+    },
+    {
+        "merged": "E:\\androidAPP\\SimpleCamera\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_launcher_icon.png",
+        "source": "E:\\androidAPP\\SimpleCamera\\app\\src\\main\\res\\drawable-xhdpi\\ic_launcher_icon.png"
+    },
+    {
+        "merged": "E:\\androidAPP\\SimpleCamera\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\btn_camera_all.png",
+        "source": "E:\\androidAPP\\SimpleCamera\\app\\src\\main\\res\\drawable-xhdpi\\btn_camera_all.png"
+    }
+]

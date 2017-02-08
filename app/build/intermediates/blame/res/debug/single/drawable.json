@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\androidAPP\\SimpleCamera\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_shutter_background.xml",
+        "source": "E:\\androidAPP\\SimpleCamera\\app\\src\\main\\res\\drawable\\btn_shutter_background.xml"
+    },
+    {
+        "merged": "E:\\androidAPP\\SimpleCamera\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_capture.xml",
+        "source": "E:\\androidAPP\\SimpleCamera\\app\\src\\main\\res\\drawable\\btn_capture.xml"
+    }
+]
