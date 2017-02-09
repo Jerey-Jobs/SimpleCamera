@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "org.jerey.playcamera"
-        minSdkVersion 9
+        minSdkVersion 15
         targetSdkVersion 25
     }
 
@@ -19,5 +19,5 @@ android {
 }
 
 dependencies {
-
+    compile 'com.cn.jerey:permissiontools:1.3'
 }

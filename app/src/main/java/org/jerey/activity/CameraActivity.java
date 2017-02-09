@@ -1,5 +1,6 @@
 package org.jerey.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -9,6 +10,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.cn.jerey.permissiontools.Callback.PermissionCallbacks;
+import com.cn.jerey.permissiontools.PermissionTools;
 
 import org.jerey.camera.CameraInterface;
 import org.jerey.camera.CameraInterface.CamOpenOverCallback;
@@ -16,10 +21,13 @@ import org.jerey.camera.preview.CameraSurfaceView;
 import org.jerey.playcamera.R;
 import org.jerey.util.DisplayUtil;
 
+import java.util.List;
+
 public class CameraActivity extends Activity implements CamOpenOverCallback {
 	private static final String TAG = "xiamin";
-	CameraSurfaceView surfaceView = null;
-	ImageButton shutterBtn;
+	private CameraSurfaceView surfaceView = null;
+	private ImageButton shutterBtn;
+	private PermissionTools mPerm;
 	float previewRate = -1f;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +41,31 @@ public class CameraActivity extends Activity implements CamOpenOverCallback {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				CameraInterface.getInstance().doOpenCamera(CameraActivity.this);
-			}
-		}).start();
+
+		mPerm = new PermissionTools.Builder(this)
+				.setRequestCode(111)
+				.setOnPermissionCallbacks(new PermissionCallbacks() {
+					@Override
+					public void onPermissionsGranted(int requestCode, List<String> perms) {
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								CameraInterface.getInstance().doOpenCamera(CameraActivity.this);
+							}
+						}).start();
+					}
+
+					@Override
+					public void onPermissionsDenied(int requestCode, List<String> perms) {
+						Toast.makeText(CameraActivity.this,"权限被拒绝",Toast.LENGTH_SHORT).show();
+						finish();
+					}
+				})
+				.build();
+		mPerm.requestPermissions(Manifest.permission.CAMERA,
+				Manifest.permission.WRITE_EXTERNAL_STORAGE,
+				Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
+
 	}
 
 	@Override
@@ -93,5 +120,11 @@ public class CameraActivity extends Activity implements CamOpenOverCallback {
 	protected void onStop() {
 		super.onStop();
 		CameraInterface.getInstance().doStopCamera();
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		mPerm.onRequestPermissionsResult(requestCode,permissions,grantResults);
 	}
 }
